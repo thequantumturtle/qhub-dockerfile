@@ -7,12 +7,15 @@ LABEL maintainer="The Quantum Turtle <quantumturtle09@gmail.com>"
 
 USER root
 
+RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
+
 # ffmpeg for matplotlib anim
 RUN apt-get update && \
     apt-get install -y --no-install-recommends ffmpeg && \
     rm -rf /var/lib/apt/lists/*
 
 USER $NB_UID
+
 
 # Install Python 3 packages
 RUN conda install --quiet --yes \
@@ -33,7 +36,7 @@ RUN conda install --quiet --yes \
     'pandas=0.25*' \
     'patsy=0.5*' \
     'protobuf=3.9.*' \
-    'qiskit'\
+    # 'qiskit'\
     'scikit-image=0.15*' \
     'scikit-learn=0.21*' \
     'scipy=1.3*' \
@@ -59,6 +62,10 @@ RUN conda install --quiet --yes \
     rm -rf /home/$NB_USER/.node-gyp && \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
+
+
+# Can only instlal qiskit with pip? does it install to conda env?
+RUN pip install qiskit
 
 # Install facets which does not have a pip or conda package at the moment
 RUN cd /tmp && \
