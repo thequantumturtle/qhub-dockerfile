@@ -7,8 +7,6 @@ LABEL maintainer="The Quantum Turtle <quantumturtle09@gmail.com>"
 
 USER root
 
-RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
-
 # ffmpeg for matplotlib anim
 RUN apt-get update && \
     apt-get install -y --no-install-recommends ffmpeg && \
@@ -65,7 +63,7 @@ RUN conda install --quiet --yes \
 
 
 # Can only instlal qiskit with pip? does it install to conda env?
-RUN pip install qiskit
+RUN pip install --no-cache-dir qiskit
 
 # Install facets which does not have a pip or conda package at the moment
 RUN cd /tmp && \
