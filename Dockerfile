@@ -34,7 +34,6 @@ RUN conda install --quiet --yes \
     'pandas=0.25*' \
     'patsy=0.5*' \
     'protobuf=3.9.*' \
-    # 'qiskit'\
     'scikit-image=0.15*' \
     'scikit-learn=0.21*' \
     'scipy=1.3*' \
@@ -63,7 +62,7 @@ RUN conda install --quiet --yes \
 
 
 # Can only instlal qiskit with pip? does it install to conda env?
-RUN pip install --no-cache-dir qiskit
+RUN  pip install --no-cache --no-cache-dir --upgrade qiskit
 
 # Install facets which does not have a pip or conda package at the moment
 RUN cd /tmp && \
